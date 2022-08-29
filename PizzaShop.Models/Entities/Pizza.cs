@@ -18,6 +18,7 @@ namespace PizzaShop.Models.Entities
         [Required(ErrorMessage = "You must choose size!")]
         public PizzaSizeEnum PizzaSize { get; set; }
 
+        [Required(ErrorMessage = "You must choose size!")]
         public PizzaCrustEnum PizzaCrust { get; set; }
 
         public int OrderId;

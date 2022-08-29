@@ -1,38 +1,63 @@
-﻿@using Homework4.Models.Domain
+﻿@using PizzaShop.Models.Entities
+@using PizzaShop.Models.Entities.Enums
+
 @model IEnumerable<Order>
 
 @{
+    foreach (var item in Model)
+    {
+        Console.WriteLine("Order");
+        foreach (var i in item.PizzaNavigation.Toppings)
+        {
+            Console.WriteLine(i.ToppingType);
+        }
+    }
 }
 
 <h1 class="m-5">Orders</h1>
 
 <table class="table">
     <thead>
-    <tr>
-        <th>ID</th>
-        <th>Customer Name</th>
-        <th>Address</th>
-        <th>Pizza</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Additional Order Information</th>
-    </tr>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Pizza Type</th>
+            <th>Size</th>
+            <th>Crust</th>
+            <th>Toppings</th>
+            <th>Additional Order Information</th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <th>@item.Id</th>
-            <td>@item.CustomerName</td>
-            <td>@item.Address</td>
-            <td>@item.Pizza</td>
-            <td>@item.Phone</td>
-            <td>@item.Email</td>
-            <td>@item.AdditionalOrderInfo</td>
-            <td>
-                @Html.ActionLink("View", "View", "PizzaOrder", new { id = @item.Id }, new { @class="btn btn-primary" })
-            </td>
-        </tr>
-    }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.Id</th>
+                <td>@item.CustomerNavigation.CustomerName</td>
+                <td>@item.CustomerNavigation.Address</td>
+                <td>@item.CustomerNavigation.Phone</td>
+                <td>@item.CustomerNavigation.Email</td>
+                <td>@item.PizzaNavigation.PizzaType</td>
+                <td>@item.PizzaNavigation.PizzaSize</td>
+                <td>@item.PizzaNavigation.PizzaCrust</td>
+                <td>
+                    <ul>
+                        @foreach (var i in item.PizzaNavigation.Toppings)
+                        {
+                            <li>@i.ToppingType</li>
+
+                        }
+                    </ul>
+                </td>
+
+                <td>@item.AdditionalOrderInfo</td>
+                <td>
+                    @Html.ActionLink("View", "View", "PizzaOrder", new { id = @item.Id }, new { @class="btn btn-primary" })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

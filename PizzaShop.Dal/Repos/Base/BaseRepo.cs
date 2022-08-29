@@ -68,20 +68,20 @@ namespace PizzaShop.Dal.Repos.Base
             Dispose(false);
         }
 
-        public virtual Task<int> AddAsync(T entity, bool persist = true)
+        public virtual async Task<int> AddAsync(T entity, bool persist = true)
         {
-            Table.AddAsync(entity);
-            return Context.SaveChangesAsync();
+            await Table.AddAsync(entity);
+            return await Context.SaveChangesAsync();
         }
 
-        public virtual Task<int> DeleteAsync(T entity, bool persist = true)
+        public virtual async Task<int> DeleteAsync(T entity, bool persist = true)
         {
             Table.Remove(entity);
-            return Context.SaveChangesAsync();
+            return await Context.SaveChangesAsync();
         }
 
         public abstract Task<int> UpdateAsync(T entity, bool persist = true);
         public abstract Task<T> FindAsync(int? id);
-        public abstract Task<IEnumerable<T>> GetAllAsync();
+        public abstract IEnumerable<T> GetAll();
     }
 }

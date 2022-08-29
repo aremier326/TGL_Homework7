@@ -20,7 +20,7 @@ namespace PizzaShop.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var orders = await OrderRepo.GetAllAsync();
+            var orders = OrderRepo.GetAll();
             return View(orders);
         }
 
@@ -54,6 +54,8 @@ namespace PizzaShop.MVC.Controllers
                 AdditionalOrderInfo = placeOrderRequest.AdditionalOrderInfo
             };
 
+            ModelState.Remove("PizzaNavigation.OrderNavigation");
+
             if (ModelState.IsValid)
             {
                 await OrderRepo.AddAsync(order);
@@ -65,7 +67,18 @@ namespace PizzaShop.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> View(int id)
         {
+
+            
+
             var order = await OrderRepo.FindAsync(id);
+
+            //some test
+            Console.WriteLine("beforeforeach");
+            foreach (var item in order.PizzaNavigation.Toppings)
+            {
+                Console.WriteLine(item + "in foreach");
+            }
+            //
 
             if (order == null) return RedirectToAction("Index");
 

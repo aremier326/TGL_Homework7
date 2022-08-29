@@ -12,7 +12,7 @@ using PizzaShop.Dal.Data;
 namespace PizzaShop.Dal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220828195644_InitialMigration")]
+    [Migration("20220829133644_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -141,15 +141,15 @@ namespace PizzaShop.Dal.Migrations
 
             modelBuilder.Entity("PizzaTopping", b =>
                 {
-                    b.Property<int>("PizzasId")
+                    b.Property<int>("PizzaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ToppingsId")
+                    b.Property<int>("ToppingId")
                         .HasColumnType("int");
 
-                    b.HasKey("PizzasId", "ToppingsId");
+                    b.HasKey("PizzaId", "ToppingId");
 
-                    b.HasIndex("ToppingsId");
+                    b.HasIndex("ToppingId");
 
                     b.ToTable("PizzaTopping", "dbo");
                 });
@@ -180,15 +180,17 @@ namespace PizzaShop.Dal.Migrations
                 {
                     b.HasOne("PizzaShop.Models.Entities.Pizza", null)
                         .WithMany()
-                        .HasForeignKey("PizzasId")
+                        .HasForeignKey("PizzaId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_PizzaTopping_Pizza_PizzaId");
 
                     b.HasOne("PizzaShop.Models.Entities.Topping", null)
                         .WithMany()
-                        .HasForeignKey("ToppingsId")
+                        .HasForeignKey("ToppingId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_PizzaTopping_Topping_ToppingId");
                 });
 
             modelBuilder.Entity("PizzaShop.Models.Entities.Customer", b =>

@@ -23,9 +23,9 @@ namespace PizzaShop.Dal.Repos
             return await Table.FindAsync(id);
         }
 
-        public override Task<IEnumerable<Topping>> GetAllAsync()
+        public override IEnumerable<Topping> GetAll()
         {
-            return (Task<IEnumerable<Topping>>)Table.OrderBy(x => x.Id);
+            return Table.OrderBy(x => x.Id);
         }
 
         public override Task<int> UpdateAsync(Topping entity, bool persist = true)

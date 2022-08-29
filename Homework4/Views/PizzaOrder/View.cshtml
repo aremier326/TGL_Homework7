@@ -1,7 +1,7 @@
-﻿@model Order
+﻿@using PizzaShop.Models.Entities
+@using PizzaShop.Models.Entities.Enums
 
-@{
-}
+@model Order
 
 <h1 class="m-5">Edit order</h1>
 
@@ -11,31 +11,45 @@
         <input type="text" class="form-control" asp-for="Id" readonly>
     </div>
     <div class="mb-3">
-        <label asp-for="CustomerName" class="form-label"></label>
-        <input type="text" class="form-control" asp-for="CustomerName">
-        <span asp-validation-for="CustomerName" class="text-danger"></span>
+        <label asp-for="CustomerNavigation.CustomerName" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="CustomerNavigation.CustomerName">
+        <span asp-validation-for="CustomerNavigation.CustomerName" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="Address" class="form-label"></label>
-        <input type="text" class="form-control" asp-for="Address">
-        <span asp-validation-for="Address" class="text-danger"></span>
+        <label asp-for="CustomerNavigation.Address" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="CustomerNavigation.Address">
+        <span asp-validation-for="CustomerNavigation.Address" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="Pizza" class="form-label"></label>
-        <select asp-for="Pizza" class="form-control" asp-items="Html.GetEnumSelectList<PizzaEnum>()">
+        <label asp-for="CustomerNavigation.Phone" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="CustomerNavigation.Phone">
+        <span asp-validation-for="CustomerNavigation.Phone" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="CustomerNavigation.Email" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="CustomerNavigation.Email">
+        <span asp-validation-for="CustomerNavigation.Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PizzaNavigation.PizzaType" class="form-label"></label>
+        <select asp-for="PizzaNavigation.PizzaType" class="form-control" asp-items="Html.GetEnumSelectList<PizzaEnum>()">
         </select>
-        <span asp-validation-for="Pizza" class="text-danger"></span>
+        <span asp-validation-for="PizzaNavigation.PizzaType" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="Phone" class="form-label"></label>
-        <input type="text" class="form-control" asp-for="Phone">
-        <span asp-validation-for="Phone" class="text-danger"></span>
+        <label asp-for="PizzaNavigation.PizzaCrust" class="form-label"></label>
+        <select asp-for="PizzaNavigation.PizzaCrust" class="form-control" asp-items="Html.GetEnumSelectList<PizzaCrustEnum>()">
+        </select>
+        <span asp-validation-for="PizzaNavigation.PizzaCrust" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="Email" class="form-label"></label>
-        <input type="text" class="form-control" asp-for="Email">
-        <span asp-validation-for="Email" class="text-danger"></span>
+        <label asp-for="PizzaNavigation.PizzaSize" class="form-label"></label>
+        <select asp-for="PizzaNavigation.PizzaSize" class="form-control" asp-items="Html.GetEnumSelectList<PizzaSizeEnum>()">
+        </select>
+        <span asp-validation-for="PizzaNavigation.PizzaSize" class="text-danger"></span>
     </div>
+
     <div class="mb-3">
         <label asp-for="AdditionalOrderInfo" class="form-label">Additional information</label>
         <input type="text" class="form-control" asp-for="AdditionalOrderInfo">

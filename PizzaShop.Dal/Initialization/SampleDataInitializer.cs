@@ -32,11 +32,9 @@ namespace PizzaShop.Dal.Initialization
         {
             context.Toppings.AddRange(SampleData.Toppings);
             context.SaveChanges();
-            context.Pizzas.AddRange(SampleData.Pizzas(context.Toppings.ToList()));
-            context.SaveChanges();
             context.Customers.AddRange(SampleData.Customers());
             context.SaveChanges();
-            context.Orders.AddRange(SampleData.Orders(context.Customers.ToList(), context.Pizzas.ToList()));
+            context.Orders.AddRange(SampleData.Orders(context.Customers.ToList(), context.Toppings.ToList()));
             context.SaveChanges();
         }
 

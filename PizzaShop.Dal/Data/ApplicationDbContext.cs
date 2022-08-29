@@ -30,6 +30,26 @@ namespace PizzaShop.Dal.Data
                 .HasOne(p => p.PizzaNavigation)
                 .WithOne(o => o.OrderNavigation)
                 .HasForeignKey<Pizza>(o => o.OrderId);
+
+            modelBuilder.Entity<Pizza>()
+                .HasMany(t => t.Toppings)
+                .WithMany(p => p.Pizzas)
+                .UsingEntity<Dictionary<string, object>>(
+                "PizzaTopping",
+                j => j
+                    .HasOne<Topping>()
+                    .WithMany()
+                    .HasForeignKey("ToppingId")
+                    .HasConstraintName("FK_PizzaTopping_Topping_ToppingId")
+                    .OnDelete(DeleteBehavior.Cascade),
+                j => j
+                    .HasOne<Pizza>()
+                    .WithMany()
+                    .HasForeignKey("PizzaId")
+                    .HasConstraintName("FK_PizzaTopping_Pizza_PizzaId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                );
+
         }
     }
 }

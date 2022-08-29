@@ -26,9 +26,10 @@ namespace PizzaShop.Dal.Repos
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public override Task<IEnumerable<Pizza>> GetAllAsync()
+        public override IEnumerable<Pizza> GetAll()
         {
-            return (Task<IEnumerable<Pizza>>)Table.OrderBy(x => x.Id);
+            return Table
+                .OrderBy(x => x.Id);
         }
 
         public override async Task<int> UpdateAsync(Pizza entity, bool persist = true)

@@ -26,9 +26,9 @@ namespace PizzaShop.Dal.Repos
                 .FirstOrDefaultAsync();
         }
 
-        public override Task<IEnumerable<Customer>> GetAllAsync()
+        public override IEnumerable<Customer> GetAll()
         {
-            return (Task<IEnumerable<Customer>>)Table
+            return Table
                 .Include(x => x.Orders);
         }
 

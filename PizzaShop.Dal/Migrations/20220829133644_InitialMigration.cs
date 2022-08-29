@@ -98,22 +98,22 @@ namespace PizzaShop.Dal.Migrations
                 schema: "dbo",
                 columns: table => new
                 {
-                    PizzasId = table.Column<int>(type: "int", nullable: false),
-                    ToppingsId = table.Column<int>(type: "int", nullable: false)
+                    PizzaId = table.Column<int>(type: "int", nullable: false),
+                    ToppingId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PizzaTopping", x => new { x.PizzasId, x.ToppingsId });
+                    table.PrimaryKey("PK_PizzaTopping", x => new { x.PizzaId, x.ToppingId });
                     table.ForeignKey(
-                        name: "FK_PizzaTopping_Pizza_PizzasId",
-                        column: x => x.PizzasId,
+                        name: "FK_PizzaTopping_Pizza_PizzaId",
+                        column: x => x.PizzaId,
                         principalSchema: "dbo",
                         principalTable: "Pizza",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PizzaTopping_Topping_ToppingsId",
-                        column: x => x.ToppingsId,
+                        name: "FK_PizzaTopping_Topping_ToppingId",
+                        column: x => x.ToppingId,
                         principalSchema: "dbo",
                         principalTable: "Topping",
                         principalColumn: "Id",
@@ -134,10 +134,10 @@ namespace PizzaShop.Dal.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_PizzaTopping_ToppingsId",
+                name: "IX_PizzaTopping_ToppingId",
                 schema: "dbo",
                 table: "PizzaTopping",
-                column: "ToppingsId");
+                column: "ToppingId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

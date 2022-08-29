@@ -16,19 +16,21 @@ namespace PizzaShop.Dal.Repos
         {
         }
 
-        public override Task<Order> FindAsync(int? id)
+        public override async Task<Order> FindAsync(int? id)
         {
-            return Table
+            return await Table
                 .Where(x => x.Id == id)
                 .Include(x => x.CustomerNavigation)
                 .Include(x => x.PizzaNavigation)
                 .FirstOrDefaultAsync();
         }
 
-        public override Task<IEnumerable<Order>> GetAllAsync()
+        public override IEnumerable<Order> GetAll()
         {
-            return (Task<IEnumerable<Order>>)Table
+            return Table
                 .Include(x => x.CustomerNavigation)
+                .Include(x => x.PizzaNavigation)
+                .Include(x => x.PizzaNavigation.Toppings)
                 .OrderBy(x => x.Id);
         }
 
