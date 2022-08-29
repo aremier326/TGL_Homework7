@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome at our Pizza Shop!</h1>
+    <h3 class="m-3">This is a simple CRUD app. You can add, delete, update and view pizza orders.<br/>
+        Created by Artem Meniak<br/></h3>
+    <img class="main-image m-5" src="images/PizzaTime.jpg" 
+         alt="oops, there should be Peter Parker pic"/>
+    <br/>
+
+    @Html.ActionLink("Let's make some orders!", "Add", "PizzaOrder", null, new {@class="btn btn-primary mt-2"})
+</div>
