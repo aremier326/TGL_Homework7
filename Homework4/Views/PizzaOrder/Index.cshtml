@@ -3,17 +3,6 @@
 
 @model IEnumerable<Order>
 
-@{
-    foreach (var item in Model)
-    {
-        Console.WriteLine("Order");
-        foreach (var i in item.PizzaNavigation.Toppings)
-        {
-            Console.WriteLine(i.ToppingType);
-        }
-    }
-}
-
 <h1 class="m-5">Orders</h1>
 
 <table class="table">
@@ -48,7 +37,6 @@
                         @foreach (var i in item.PizzaNavigation.Toppings)
                         {
                             <li>@i.ToppingType</li>
-
                         }
                     </ul>
                 </td>

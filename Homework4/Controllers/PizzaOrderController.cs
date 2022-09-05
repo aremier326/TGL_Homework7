@@ -67,18 +67,7 @@ namespace PizzaShop.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> View(int id)
         {
-
-            
-
             var order = await OrderRepo.FindAsync(id);
-
-            //some test
-            Console.WriteLine("beforeforeach");
-            foreach (var item in order.PizzaNavigation.Toppings)
-            {
-                Console.WriteLine(item + "in foreach");
-            }
-            //
 
             if (order == null) return RedirectToAction("Index");
 
